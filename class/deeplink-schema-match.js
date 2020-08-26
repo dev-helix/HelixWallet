@@ -13,7 +13,7 @@ class DeeplinkSchemaMatch {
     if (typeof schemaString !== 'string' || schemaString.length <= 0) return false;
     const lowercaseString = schemaString.trim().toLowerCase();
     return (
-      lowercaseString.startsWith('bitcoin:') ||
+      lowercaseString.startsWith('helix:') ||
       lowercaseString.startsWith('lightning:') ||
       lowercaseString.startsWith('blue:') ||
       lowercaseString.startsWith('bluewallet:') ||
@@ -37,7 +37,7 @@ class DeeplinkSchemaMatch {
       return;
     }
 
-    if (event.url.toLowerCase().startsWith('bluewallet:bitcoin:') || event.url.toLowerCase().startsWith('bluewallet:lightning:')) {
+    if (event.url.toLowerCase().startsWith('bluewallet:helix:') || event.url.toLowerCase().startsWith('bluewallet:lightning:')) {
       event.url = event.url.substring(11);
     }
 
@@ -240,7 +240,7 @@ class DeeplinkSchemaMatch {
   }
 
   static isBitcoinAddress(address) {
-    address = address.replace('bitcoin:', '').replace('BITCOIN:', '').replace('bitcoin=', '').split('?')[0];
+    address = address.replace('helix:', '').replace('HELIX:', '').replace('helix=', '').split('?')[0];
     let isValidBitcoinAddress = false;
     try {
       bitcoin.address.toOutputScript(address);
@@ -274,14 +274,14 @@ class DeeplinkSchemaMatch {
 
   static isBothBitcoinAndLightning(url) {
     if (url.includes('lightning') && (url.includes('bitcoin') || url.includes('BITCOIN'))) {
-      const txInfo = url.split(/(bitcoin:|BITCOIN:|lightning:|lightning=|bitcoin=)+/);
+      const txInfo = url.split(/(helix:|HELIX:|lightning:|lightning=|bitcoin=)+/);
       let bitcoin;
       let lndInvoice;
       for (const [index, value] of txInfo.entries()) {
         try {
           // Inside try-catch. We dont wan't to  crash in case of an out-of-bounds error.
-          if (value.startsWith('bitcoin') || value.startsWith('BITCOIN')) {
-            bitcoin = `bitcoin:${txInfo[index + 1]}`;
+          if (value.startsWith('helix') || value.startsWith('HELIX')) {
+            bitcoin = `helix:${txInfo[index + 1]}`;
             if (!DeeplinkSchemaMatch.isBitcoinAddress(bitcoin)) {
               bitcoin = false;
               break;
@@ -308,7 +308,7 @@ class DeeplinkSchemaMatch {
   }
 
   static bip21decode(uri) {
-    return bip21.decode(uri.replace('BITCOIN:', 'bitcoin:'));
+    return bip21.decode(uri.replace('HELIX:', 'helix:'));
   }
 
   static bip21encode() {

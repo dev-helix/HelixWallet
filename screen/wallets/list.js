@@ -311,7 +311,7 @@ export default class WalletsList extends Component {
 
   renderLocalTrader = () => {
     if (BlueApp.getWallets().length > 0 && !BlueApp.getWallets().some(wallet => wallet.type === PlaceholderWallet.type)) {
-      return (
+      /*return (
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('HodlHodl', { params: { wallet: this.state.wallet }, screen: 'HodlHodl' });
@@ -326,7 +326,8 @@ export default class WalletsList extends Component {
             <Text style={styles.ltButton}>New</Text>
           </View>
         </TouchableOpacity>
-      );
+      );*/
+      return null;
     } else {
       return null;
     }

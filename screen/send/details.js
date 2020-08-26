@@ -284,7 +284,7 @@ export default class SendDetails extends Component {
   processAddressData = data => {
     this.setState({ isLoading: true }, async () => {
       const recipients = this.state.addresses;
-      const dataWithoutSchema = data.replace('bitcoin:', '').replace('BITCOIN:', '');
+      const dataWithoutSchema = data.replace('helix:', '').replace('HELIX:', '');
       if (this.state.fromWallet.isAddressValid(dataWithoutSchema)) {
         recipients[[this.state.recipientsScrollIndex]].address = dataWithoutSchema;
         const units = this.state.units;
@@ -299,8 +299,8 @@ export default class SendDetails extends Component {
         let address = '';
         let options;
         try {
-          if (!data.toLowerCase().startsWith('bitcoin:')) {
-            data = `bitcoin:${data}`;
+          if (!data.toLowerCase().startsWith('helix:')) {
+            data = `helix:${data}`;
           }
           const decoded = DeeplinkSchemaMatch.bip21decode(data);
           address = decoded.address;

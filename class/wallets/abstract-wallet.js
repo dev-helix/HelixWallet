@@ -143,7 +143,7 @@ export class AbstractWallet {
   }
 
   setSecret(newSecret) {
-    this.secret = newSecret.trim().replace('bitcoin:', '').replace('BITCOIN:', '');
+    this.secret = newSecret.trim().replace('helix:', '').replace('HELIX:', '');
 
     if (this.secret.startsWith('BC1')) this.secret = this.secret.toLowerCase();
 

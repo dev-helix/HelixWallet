@@ -299,10 +299,6 @@ const WalletsAdd = () => {
             onPress={handleOnBitcoinButtonPressed}
             style={styles.button}
           />
-          <View style={styles.or}>
-            <BlueTextCenteredHooks style={styles.orCenter}>{loc.wallets.add_or}</BlueTextCenteredHooks>
-          </View>
-          <LightningButton active={selectedWalletType === Chain.OFFCHAIN} onPress={handleOnLightningButtonPressed} style={styles.button} />
         </View>
 
         <View style={styles.advanced}>
