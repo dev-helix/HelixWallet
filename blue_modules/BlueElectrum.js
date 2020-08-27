@@ -7,7 +7,7 @@ const reverse = require('buffer-reverse');
 const BigNumber = require('bignumber.js');
 
 const storageKey = 'ELECTRUM_PEERS';
-const defaultPeer = { host: '192.168.1.129', ssl: '50002' };
+const defaultPeer = { host: '192.168.1.11', ssl: '5001' };
 const hardcodedPeers = [
   // { host: 'noveltybobble.coinjoined.com', tcp: '50001' }, // down
   // { host: 'electrum.be', tcp: '50001' },
@@ -17,7 +17,7 @@ const hardcodedPeers = [
   // { host: 'Bitkoins.nl', tcp: '50001' }, // down
   // { host: 'fullnode.coinkite.com', tcp: '50001' },
   // { host: 'preperfect.eleCTruMioUS.com', tcp: '50001' }, // down
-  { host: '192.168.1.129', ssl: '50002' },
+  { host: '192.168.1.11', ssl: '5000' },
 
 ];
 
