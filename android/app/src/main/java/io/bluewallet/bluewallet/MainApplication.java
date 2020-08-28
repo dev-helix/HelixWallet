@@ -1,4 +1,4 @@
-package io.bluewallet.bluewallet;
+package com.helix.helixwallet;
 
 import android.app.Application;
 import android.content.Context;

@@ -250,7 +250,7 @@ export default class TransactionsStatus extends Component {
         {this.state.isHandOffUseEnabled && (
           <Handoff
             title={`Bitcoin Transaction ${this.state.tx.hash}`}
-            type="io.bluewallet.bluewallet"
+            type="com.helix.helixwallet"
             url={`https://blockstream.info/tx/${this.state.tx.hash}`}
           />
         )}

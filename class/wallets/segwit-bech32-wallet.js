@@ -92,7 +92,7 @@ export class SegwitBech32Wallet extends LegacyWallet {
     inputs.forEach(input => {
       if (!skipSigning) {
         // skiping signing related stuff
-        keyPair = bitcoin.ECPair.fromWIF(this.secret); // secret is WIF
+        keyPair = bitcoin.ECPair.fromWIF(this.secret, bitcoin.networks.bitcoin); // secret is WIF
       }
       values[c] = input.value;
       c++;

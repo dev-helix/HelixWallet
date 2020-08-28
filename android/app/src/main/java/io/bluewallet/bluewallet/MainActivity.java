@@ -1,4 +1,4 @@
-package io.bluewallet.bluewallet;
+package com.helix.helixwallet;
 
 import com.facebook.react.ReactActivity;
 
