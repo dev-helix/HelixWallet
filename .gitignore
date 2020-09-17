@@ -62,3 +62,4 @@ artifacts/
 
 # Editors
 .vscode/
+android/app/release/
