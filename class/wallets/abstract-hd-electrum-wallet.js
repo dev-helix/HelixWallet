@@ -808,7 +808,6 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
   createTransaction(utxos, targets, feeRate, changeAddress, sequence, skipSigning = false, masterFingerprint) {
     if (!changeAddress) throw new Error('No change address provided');
     sequence = sequence || AbstractHDElectrumWallet.defaultRBFSequence;
-
     let algo = coinSelectAccumulative;
     if (targets.length === 1 && targets[0] && !targets[0].value) {
       // we want to send MAX
@@ -829,10 +828,12 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
     const values = {};
 
     inputs.forEach(input => {
+      console.log(input);
       let keyPair;
       if (!skipSigning) {
         // skiping signing related stuff
         keyPair = bitcoin.ECPair.fromWIF(this._getWifForAddress(input.address));
+        console.log('keypair ok');
         keypairs[c] = keyPair;
       }
       values[c] = input.value;
@@ -841,7 +842,7 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
         // skiping signing related stuff
         if (!input.address || !this._getWifForAddress(input.address)) throw new Error('Internal error: no address or WIF to sign input');
       }
-
+      console.log('2');
       let masterFingerprintBuffer;
       if (masterFingerprint) {
         let masterFingerprintHex = Number(masterFingerprint).toString(16);
@@ -851,11 +852,14 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
       } else {
         masterFingerprintBuffer = Buffer.from([0x00, 0x00, 0x00, 0x00]);
       }
+      console.log('3');
       // this is not correct fingerprint, as we dont know real fingerprint - we got zpub with 84/0, but fingerpting
       // should be from root. basically, fingerprint should be provided from outside  by user when importing zpub
 
       psbt = this._addPsbtInput(psbt, input, sequence, masterFingerprintBuffer);
+      console.log('4');
     });
+    console.log('OK');
 
     outputs.forEach(output => {
       // if output has no address - this is change output
@@ -898,6 +902,7 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
 
       psbt.addOutput(outputData);
     });
+    console.log('6');
 
     if (!skipSigning) {
       // skiping signing related stuff
@@ -905,11 +910,14 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
         psbt.signInput(cc, keypairs[cc]);
       }
     }
+    console.log('7');
 
     let tx;
     if (!skipSigning) {
       tx = psbt.finalizeAllInputs().extractTransaction();
-    }
+    }   
+     console.log('8');
+
     return { tx, inputs, outputs, fee, psbt };
   }
 

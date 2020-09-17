@@ -251,7 +251,7 @@ export default class TransactionsStatus extends Component {
           <Handoff
             title={`Bitcoin Transaction ${this.state.tx.hash}`}
             type="io.bluewallet.bluewallet"
-            url={`https://blockstream.info/tx/${this.state.tx.hash}`}
+            url={`https://explorer.helix-crypto.com/tx/${this.state.tx.hash}`}
           />
         )}
         <StatusBar barStyle="default" />

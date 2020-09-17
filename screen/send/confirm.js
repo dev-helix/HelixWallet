@@ -62,7 +62,7 @@ export default class Confirm extends Component {
             return;
           }
         }
-
+        console.log(this.state.tx);
         const result = await this.state.fromWallet.broadcastTx(this.state.tx);
         if (!result) {
           throw new Error(loc.errors.broadcast);

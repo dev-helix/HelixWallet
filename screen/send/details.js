@@ -527,9 +527,11 @@ export default class SendDetails extends Component {
       targets,
       requestedSatPerByte,
       changeAddress,
-      this.state.isTransactionReplaceable ? HDSegwitBech32Wallet.defaultRBFSequence : HDSegwitBech32Wallet.finalRBFSequence,
+      false
+      //this.state.isTransactionReplaceable ? HDSegwitBech32Wallet.defaultRBFSequence : HDSegwitBech32Wallet.finalRBFSequence,
     );
-
+    console.log('iciTrx');
+      console.log(wallet.typeReadable);
     if (wallet.type === WatchOnlyWallet.type) {
       // watch-only wallets with enabled HW wallet support have different flow. we have to show PSBT to user as QR code
       // so he can scan it and sign it. then we have to scan it back from user (via camera and QR code), and ask
@@ -542,12 +544,14 @@ export default class SendDetails extends Component {
       this.setState({ isLoading: false });
       return;
     }
+ 
 
     BlueApp.tx_metadata = BlueApp.tx_metadata || {};
     BlueApp.tx_metadata[tx.getId()] = {
       txhex: tx.toHex(),
       memo: this.state.memo,
     };
+
     await BlueApp.saveToDisk();
     this.props.navigation.navigate('Confirm', {
       fee: new BigNumber(fee).dividedBy(100000000).toNumber(),
@@ -557,6 +561,7 @@ export default class SendDetails extends Component {
       recipients: targets,
       satoshiPerByte: requestedSatPerByte,
     });
+
     this.setState({ isLoading: false });
   }
 

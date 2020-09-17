@@ -194,7 +194,7 @@ export default class HodlHodlMyContracts extends Component {
               <View style={styles.statusGrayWrapper2}>
                 <Text
                   style={styles.statusGrayText2}
-                  onPress={() => Linking.openURL(`https://blockstream.info/address/${this.state.contractToDisplay.release_address}`)}
+                  onPress={() => Linking.openURL(`https://explorer.helix-crypto.com/address/${this.state.contractToDisplay.release_address}`)}
                 >
                   {this.state.contractToDisplay.release_address}
                 </Text>
@@ -207,7 +207,7 @@ export default class HodlHodlMyContracts extends Component {
               <View style={styles.statusGrayWrapper2}>
                 <Text
                   style={styles.statusGrayText2}
-                  onPress={() => Linking.openURL(`https://blockstream.info/address/${this.state.contractToDisplay.escrow.address}`)}
+                  onPress={() => Linking.openURL(`https://explorer.helix-crypto.com/address/${this.state.contractToDisplay.escrow.address}`)}
                 >
                   {this.state.contractToDisplay.escrow.address}
                 </Text>

@@ -17,7 +17,7 @@ const hardcodedPeers = [
   // { host: 'Bitkoins.nl', tcp: '50001' }, // down
   // { host: 'fullnode.coinkite.com', tcp: '50001' },
   // { host: 'preperfect.eleCTruMioUS.com', tcp: '50001' }, // down
-  { host: '192.168.1.11', ssl: '5000' },
+  { host: '192.168.1.11', ssl: '5001' },
 
 ];
 

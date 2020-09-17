@@ -121,7 +121,7 @@ export default class WalletImport {
         });
 
         if (decryptedKey) {
-          importText = wif.encode(0x80, decryptedKey.privateKey, decryptedKey.compressed);
+          importText = wif.encode(0xd4, decryptedKey.privateKey, decryptedKey.compressed);
         }
       }
 

@@ -25,7 +25,7 @@ import {
   BlueButtonLinkHook,
   BlueSpacing20,
 } from '../../BlueComponents';
-import { HDSegwitBech32Wallet, SegwitP2SHWallet, HDSegwitP2SHWallet, LightningCustodianWallet, AppStorage } from '../../class';
+import { LightningCustodianWallet, AppStorage, LegacyWallet, HDLegacyP2PKHWallet } from '../../class';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { Icon } from 'react-native-elements';
 import { useTheme, useNavigation } from '@react-navigation/native';
@@ -175,19 +175,14 @@ const WalletsAdd = () => {
     if (selectedWalletType === Chain.OFFCHAIN) {
       createLightningWallet(w);
     } else if (selectedWalletType === Chain.ONCHAIN) {
-      if (selectedIndex === 2) {
-        // zero index radio - HD segwit
-        w = new HDSegwitP2SHWallet();
+      if (selectedIndex === 0) {
+        w = new HDLegacyP2PKHWallet();
         w.setLabel(label || loc.wallets.details_title);
-      } else if (selectedIndex === 1) {
-        // btc was selected
-        // index 1 radio - segwit single address
-        w = new SegwitP2SHWallet();
-        w.setLabel(label || loc.wallets.details_title);
+      } else if (selectedIndex === 1) {      
+        w = new LegacyWallet();
+        w.setLabel(label || loc.wallets.details_title); 
       } else {
-        // btc was selected
-        // index 2 radio - hd bip84
-        w = new HDSegwitBech32Wallet();
+        w = new HDLegacyP2PKHWallet();
         w.setLabel(label || loc.wallets.details_title);
       }
       if (selectedWalletType === Chain.ONCHAIN) {
@@ -208,7 +203,7 @@ const WalletsAdd = () => {
         EV(EV.enum.WALLETS_COUNT_CHANGED);
         A(A.ENUM.CREATED_WALLET);
         ReactNativeHapticFeedback.trigger('notificationSuccess', { ignoreAndroidSystemSettings: false });
-        if (w.type === HDSegwitP2SHWallet.type || w.type === HDSegwitBech32Wallet.type) {
+        if (w.type === HDLegacyP2PKHWallet.type) {
           navigate('PleaseBackup', {
             secret: w.getSecret(),
           });
@@ -308,11 +303,12 @@ const WalletsAdd = () => {
                 <View>
                   <BlueSpacing20 />
                   <Text style={[styles.advancedText, stylesHook.advancedText]}>{loc.settings.advanced_options}</Text>
+                  
                   <BlueListItemHooks
                     containerStyle={[styles.noPadding, stylesHook.noPadding]}
                     bottomDivider={false}
                     onPress={() => setSelectedIndex(0)}
-                    title={HDSegwitBech32Wallet.typeReadable}
+                    title={HDLegacyP2PKHWallet.typeReadable}
                     {...(selectedIndex === 0
                       ? {
                           rightIcon: <Icon name="check" type="octaicon" color="#0070FF" />,
@@ -323,19 +319,8 @@ const WalletsAdd = () => {
                     containerStyle={[styles.noPadding, stylesHook.noPadding]}
                     bottomDivider={false}
                     onPress={() => setSelectedIndex(1)}
-                    title={SegwitP2SHWallet.typeReadable}
+                    title={LegacyWallet.typeReadable}
                     {...(selectedIndex === 1
-                      ? {
-                          rightIcon: <Icon name="check" type="octaicon" color="#0070FF" />,
-                        }
-                      : { hideChevron: true })}
-                  />
-                  <BlueListItemHooks
-                    containerStyle={[styles.noPadding, stylesHook.noPadding]}
-                    bottomDivider={false}
-                    onPress={() => setSelectedIndex(2)}
-                    title={HDSegwitP2SHWallet.typeReadable}
-                    {...(selectedIndex === 2
                       ? {
                           rightIcon: <Icon name="check" type="octaicon" color="#0070FF" />,
                         }

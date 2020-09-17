@@ -350,7 +350,7 @@ const ReceiveDetails = () => {
         <Handoff
           title={`Bitcoin Transaction ${address}`}
           type="io.bluewallet.bluewallet"
-          url={`https://blockstream.info/address/${address}`}
+          url={`https://explorer.helix-crypto.com/address/${address}`}
         />
       )}
       {showAddress ? renderReceiveDetails() : <BlueLoadingHook />}

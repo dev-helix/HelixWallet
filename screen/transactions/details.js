@@ -170,7 +170,7 @@ export default class TransactionsDetails extends Component {
           <Handoff
             title={`Bitcoin Transaction ${this.state.tx.hash}`}
             type="io.bluewallet.bluewallet"
-            url={`https://blockstream.info/tx/${this.state.tx.hash}`}
+            url={`https://explorer.helix-crypto.com/tx/${this.state.tx.hash}`}
           />
         )}
         <StatusBar barStyle="default" />
@@ -223,7 +223,7 @@ export default class TransactionsDetails extends Component {
                 <BlueText style={styles.txHash}>{this.state.tx.hash}</BlueText>
                 <TouchableOpacity
                   onPress={() => {
-                    const url = `https://blockstream.info/tx/${this.state.tx.hash}`;
+                    const url = `https://explorer.helix-crypto.com/tx/${this.state.tx.hash}`;
                     Linking.canOpenURL(url).then(supported => {
                       if (supported) {
                         Linking.openURL(url);
